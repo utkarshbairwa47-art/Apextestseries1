@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexJEE Prep - Free JEE Mock Test Series & Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(150, 150, 150, 0.5); }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-amber-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-indigo-500/30">
+          A
+        </div>
+        <div>
+          <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">ApexJEE Prep</span>
+          <span class="hidden sm:inline-block ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300/60">AIRTS & CBT Engine</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="openGlobalLeaderboard()" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/80 hover:bg-amber-100 transition">
+          <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>AIR Leaderboard</span>
+        </button>
+        <a href="#attempt-history" class="hidden lg:inline-block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2">My Attempts</a>
+        <button id="btn-admin-panel" onclick="openAdminModal()" class="hidden inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white shadow transition">
+          <span>Admin Console</span>
+        </button>
+        <button id="btn-auth-modal" onclick="openAuthModal('login')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow transition">
+          <span id="auth-btn-label">Login / Sign Up</span>
+        </button>
+        <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <svg id="theme-icon-light" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="theme-icon-dark" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTAINER ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ==================== LANDING / TEST PORTAL VIEW ==================== -->
+    <div id="landing-view" class="space-y-10">
+
+      <!-- Candidate Profile Bar -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/40 dark:shadow-none">
+        <div class="flex items-center justify-between mb-3">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Aspirant Profile (Appears on Admit Card & Real AIR Leaderboard)</div>
+          <span id="profile-auth-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">Guest Session</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Candidate Name</label>
+            <input id="candidate-name" type="text" placeholder="Enter your full name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Current Class / Batch</label>
+            <select id="candidate-year" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="Class 11th">Class 11th</option>
+              <option value="Class 12th">Class 12th</option>
+              <option value="Dropper">Dropper</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button onclick="saveCandidateProfile()" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2">
+              <span>Save Profile</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dedicated All India Rankers Test Series (AIRTS) Banner -->
+      <section id="airts-portal" class="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-amber-500/30 shadow-2xl text-white">
+        <div class="p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider">
+              <span>All India Rankers Test Series (AIRTS)</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+              Compete Nationally with <span class="text-amber-400">Real JEE Aspirants</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+              Designed for serious AIR aspirants. AIRTS papers feature multi-concept JEE Main + Advanced bridge problems, real student leaderboards, and detailed weak & strong topic diagnostics.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-1">
+              <button onclick="filterTests('AIRTS')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-amber-500/25 transition">
+                Explore AIRTS Papers
+              </button>
+              <button onclick="openGlobalLeaderboard()" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs sm:text-sm transition">
+                View Real AIR Leaderboard
+              </button>
+            </div>
+          </div>
+          <div class="lg:col-span-5 bg-white/5 dark:bg-black/20 border border-white/10 p-6 rounded-2xl backdrop-blur-md">
+            <div class="text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">Live AIRTS Schedule</div>
+            <div class="space-y-3 text-xs">
+              <div class="flex justify-between items-center pb-2 border-b border-white/10">
+                <div>
+                  <div class="font-bold text-white">AIRTS-01: Full Syllabus Open Mock</div>
+                  <div class="text-slate-400 text-[11px]">Physics, Chem & Math • 75 Qs</div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold">Active Live</span>
+              </div>
+              <div class="flex justify-between items-center pb-2 border-b border-white/10">
+                <div>
+                  <div class="font-bold text-white">AIRTS-02: Mechanics & Bonding Part Test</div>
+                  <div class="text-slate-400 text-[11px]">Class 11 Focus • 45 Qs</div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-300 font-bold">Open</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="font-bold text-white">AIRTS-03: Electrodynamics & Calculus Test</div>
+                  <div class="text-slate-400 text-[11px]">Class 12 Focus • 45 Qs</div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-300 font-bold">Open</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter Controls & Library -->
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Test Series & Mock Library</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Switch between All India Rankers Test Series (AIRTS), Regular Mocks, and Admin-Added Custom Tests.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="filterTests('ALL')" id="filter-ALL" class="test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow">All Tests</button>
+            <button onclick="filterTests('AIRTS')" id="filter-AIRTS" class="test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">All India Rankers (AIRTS)</button>
+            <button onclick="filterTests('REGULAR')" id="filter-REGULAR" class="test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Regular Mocks</button>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div id="test-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Worldwide Student Doubt-Solving Chatbox -->
+      <section id="worldwide-chat" class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+        <div class="p-5 sm:p-6 bg-gradient-to-r from-indigo-600 to-violet-600 text-white flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-300 animate-ping"></span>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-100">Worldwide Aspirant Community</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold mt-0.5">Live JEE Doubt-Solving Chatroom</h2>
+            <p class="text-xs text-indigo-100 mt-0.5">Post Physics, Chemistry, or Maths doubts and help fellow aspirants solve problems in real time.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="chat-subject-filter" onchange="renderWorldwideChat()" class="px-3 py-2 rounded-xl bg-white/15 border border-white/25 text-white text-xs font-bold focus:outline-none">
+              <option value="ALL" class="text-slate-900">All Subjects</option>
+              <option value="Physics" class="text-slate-900">Physics Doubts</option>
+              <option value="Chemistry" class="text-slate-900">Chemistry Doubts</option>
+              <option value="Mathematics" class="text-slate-900">Mathematics Doubts</option>
+              <option value="General" class="text-slate-900">Strategy & General</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="chat-messages-box" class="p-5 h-80 overflow-y-auto space-y-3 bg-slate-50/70 dark:bg-slate-950/60">
+          <!-- Real student messages rendered here -->
+        </div>
+
+        <form onsubmit="sendChatMessage(event)" class="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col sm:flex-row gap-2.5">
+          <select id="chat-subject-select" class="px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200">
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="General">General</option>
+          </select>
+          <input id="chat-input" type="text" placeholder="Ask a JEE doubt or reply to another student..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow transition">
+            Send Doubt
+          </button>
+        </form>
+      </section>
+
+      <!-- Past Attempts History Section -->
+      <section id="attempt-history" class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">Your Mock Test Attempt History & Reports</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Review past attempts, AIRs, and weak topic summaries.</p>
+          </div>
+        </div>
+        <div id="history-container">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== CBT EXAM ENGINE VIEW ==================== -->
+    <div id="cbt-view" class="hidden flex flex-col min-h-[85vh]">
+      <!-- CBT Top Bar -->
+      <header class="bg-slate-900 text-white px-4 sm:px-6 py-3.5 rounded-2xl shadow-xl mb-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-sm">NTA</div>
+          <div>
+            <h2 id="cbt-test-title" class="text-sm sm:text-base font-extrabold truncate max-w-xs sm:max-w-md">JEE Main Mock Test</h2>
+            <div class="text-xs text-slate-400">Computer Based Test (CBT) Interface</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="cbt-timer" class="font-mono text-sm sm:text-base font-extrabold text-amber-300">01:00:00</span>
+          </div>
+          <button onclick="confirmSubmitTest()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow transition">
+            Submit Test
+          </button>
+        </div>
+      </header>
+
+      <!-- CBT Subject Tabs -->
+      <div id="cbt-subject-tabs" class="flex gap-2 mb-4 overflow-x-auto pb-1">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- CBT Main Workspace -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+        <!-- Question Panel -->
+        <div class="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <span id="q-number-badge" class="px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 font-extrabold text-xs">Question 1</span>
+                <span id="q-topic-badge" class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-xs">Topic</span>
+              </div>
+              <div class="text-xs font-bold text-slate-400">+4 / -1 Marking</div>
+            </div>
+
+            <div id="q-text-content" class="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed mb-6">
+              Question text loads here...
+            </div>
+
+            <!-- Options / Numerical Input -->
+            <div id="q-options-container" class="space-y-3 mb-6">
+              <!-- Options populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Question Footer Navigation -->
+          <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex gap-2">
+              <button onclick="markForReview()" class="px-3.5 py-2 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold text-xs border border-amber-200 dark:border-amber-800 hover:bg-amber-100 transition">
+                Mark for Review & Next
+              </button>
+              <button onclick="clearResponse()" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 transition">
+                Clear Response
+              </button>
+            </div>
+            <button onclick="nextCbtQuestion()" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow transition flex items-center gap-2">
+              <span>Save & Next</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question Palette Sidebar -->
+        <div class="lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Question Palette</span>
+            <div id="cbt-candidate-info" class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Aspirant</div>
+          </div>
+
+          <!-- Legend -->
+          <div class="grid grid-cols-2 gap-2 mb-4 text-[11px] font-semibold text-slate-600 dark:text-slate-400">
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-emerald-500 inline-block"><span>Answered</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-rose-500 inline-block"><span>Not Answered</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-amber-500 inline-block"><span>Marked for Review</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-slate-200 dark:bg-slate-800 inline-block"><span>Not Visited</span></div>
+          </div>
+
+          <!-- Palette Grid -->
+          <div id="palette-grid" class="grid grid-cols-5 gap-2 overflow-y-auto max-h-72 p-1 flex-1">
+            <!-- Populated dynamically -->
+          </div>
+
+          <button onclick="confirmSubmitTest()" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs shadow-md transition">
+            Final Submit Test
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== RESULTS & REPORT VIEW ==================== -->
+    <div id="results-view" class="hidden space-y-8">
+      <!-- Report Header -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-indigo-900 via-slate-900 to-violet-950 text-white shadow-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-extrabold uppercase tracking-wider mb-2">
+            <span>Mock Test Submitted Successfully</span>
+          </div>
+          <h2 id="res-test-title" class="text-2xl sm:text-3xl font-extrabold">Test Report & Analytics</h2>
+          <p id="res-candidate-subtitle" class="text-xs sm:text-sm text-slate-300 mt-1">Detailed performance breakdown for Aspirant</p>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="returnToDashboard()" class="px-5 py-2.5 rounded-xl bg-white text-slate-900 font-extrabold text-xs sm:text-sm shadow hover:bg-slate-100 transition">
+            &larr; Back to Dashboard
+          </button>
+        </div>
+      </div>
+
+      <!-- Score & Rank Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Score</span>
+          <div id="res-score" class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">0 / 0</div>
+          <div id="res-score-sub" class="mt-2 text-xs font-semibold text-slate-500">Correct: 0 | Incorrect: 0</div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Actual Test Rank</span>
+            <span id="res-pool-badge" class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Attempted: 1</span>
+          </div>
+          <div id="res-air" class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">#1</div>
+          <div id="res-percentile" class="mt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">100.00 Percentile</div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Overall Accuracy</span>
+          <div id="res-accuracy" class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">0%</div>
+          <div class="mt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">Based on attempted questions</div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Time Taken</span>
+          <div id="res-time" class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1">0m 0s</div>
+          <div class="mt-2 text-xs font-semibold text-slate-500">Time efficiency: Optimal</div>
+        </div>
+      </div>
+
+      <!-- Cohort Benchmark Comparison Card -->
+      <section class="bg-white dark:bg-slate-900 rounded-2xl border border-amber-300/70 dark:border-amber-800/60 p-6 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+              <span>Real Aspirant Cohort Comparison</span>
+            </div>
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Your Score vs. Real Test Topper & Cohort Average</h2>
+          </div>
+          <div id="res-top100-gap" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800">
+            Rank #1 in Current Cohort
+          </div>
+        </div>
+
+        <div id="res-cohort-comparison" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Cohort benchmark cards injected dynamically -->
+        </div>
+      </section>
+
+      <!-- Granular Weak & Strong Topic Diagnostics & Leaderboard -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1">Granular Weak & Strong Topic Diagnostics</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Actionable classification of every chapter based on your test accuracy.</p>
+
+            <div id="res-topic-diagnostics" class="space-y-4">
+              <!-- Topic cards injected here -->
+            </div>
+          </div>
+
+          <!-- Detailed Question Solutions & Step-by-Step Explanation -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-4">Question-by-Question Detailed Solutions</h2>
+            <div id="res-question-solutions" class="space-y-4">
+              <!-- Question solution items injected here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- All India Rank Leaderboard Comparison -->
+        <div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm flex flex-col">
+          <div class="flex items-center justify-between mb-1">
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Real Aspirants Leaderboard</h2>
+            <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Verified Attempts</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Only real students who attempted this mock test appear here.</p>
+
+          <div id="res-leaderboard" class="space-y-2.5 flex-1">
+            <!-- Leaderboard rows injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== GLOBAL ALL INDIA LEADERBOARD MODAL ==================== -->
+  <div id="global-leaderboard-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Verified Aspirant Rankings</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Real Student AIR Leaderboard</h3>
+        </div>
+        <button onclick="closeGlobalLeaderboard()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 mb-4">
+        Ranked strictly by real scores of students who submitted tests on this platform. No placeholder or fake names are shown.
+      </p>
+
+      <div id="global-leaderboard-body" class="space-y-2.5 overflow-y-auto pr-1 flex-1">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SIGN UP / LOGIN MODAL ==================== -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex gap-2 p-1 rounded-xl bg-slate-100 dark:bg-slate-800">
+          <button id="tab-login" onclick="switchAuthTab('login')" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white">Login</button>
+          <button id="tab-signup" onclick="switchAuthTab('signup')" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300">Sign Up</button>
+        </div>
+        <button onclick="closeAuthModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+
+      <div id="logged-in-account-box" class="hidden mb-4 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+        <div class="text-xs font-bold text-emerald-700 dark:text-emerald-300">Signed In Account</div>
+        <div id="logged-in-details" class="text-sm font-extrabold text-slate-900 dark:text-white mt-0.5"></div>
+        <button onclick="logoutUser()" class="mt-3 px-4 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold">Logout</button>
+      </div>
+
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3.5">
+        <div id="auth-name-group" class="hidden">
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Full Name</label>
+          <input id="auth-name" type="text" placeholder="Enter your name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Email Address</label>
+          <input id="auth-email" type="email" required placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Password</label>
+          <input id="auth-password" type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" />
+        </div>
+        <div id="auth-batch-group" class="hidden">
+          <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Batch</label>
+          <select id="auth-batch" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+            <option value="Class 11th">Class 11th</option>
+            <option value="Class 12th">Class 12th</option>
+            <option value="Dropper">Dropper</option>
+          </select>
+        </div>
+        <button type="submit" id="auth-submit-btn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow transition">
+          Login to Account
+        </button>
+      </form>
+      <p class="text-[11px] text-slate-400 mt-3 text-center">Logging in automatically restores all your past test records and scores.</p>
+    </div>
+  </div>
+
+  <!-- ==================== ADMINISTRATOR CONSOLE MODAL ==================== -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full p-6 sm:p-8 border border-rose-500/40 shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-rose-600">Website Administrator Console</span>
+          <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Hidden Records, Chat Moderation & Mock Test Uploader</h3>
+        </div>
+        <button onclick="closeAdminModal()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">✕</button>
+      </div>
+
+      <div class="flex flex-wrap gap-2 my-4">
+        <button onclick="switchAdminTab('users')" id="admin-tab-users" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 text-white">Registered Users & Hidden Records</button>
+        <button onclick="switchAdminTab('chat')" id="admin-tab-chat" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Moderate Chat & Ban Users</button>
+        <button onclick="switchAdminTab('addtest')" id="admin-tab-addtest" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">+ Add Your Mock Test</button>
+      </div>
+
+      <div id="admin-content-area" class="flex-1 overflow-y-auto pr-1 space-y-4">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT: QUESTION BANK, CBT ENGINE & ANALYTICS ==================== -->
+  <script>
+    /**
+     * AUTHENTIC JEE MOCK TEST BANK
+     */
+    const BUILTIN_MOCK_TESTS = [
+      {
+        id: 'mock_1',
+        series: 'REGULAR',
+        title: 'Full Syllabus Mock Test #1 (NTA Pattern)',
+        category: 'FULL',
+        badge: 'Regular • Full Syllabus',
+        difficulty: 'JEE Main (Medium)',
+        durationMinutes: 60,
+        image: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80',
+        description: 'Complete PCM mock test covering Class 11 & 12 syllabus with single-choice and numerical value questions.',
+        questions: [
+          {
+            id: 'q1',
+            subject: 'Physics',
+            topic: 'Mechanics',
+            type: 'MCQ',
+            text: 'A particle moves in a straight line with retardation proportional to its displacement. Its loss of kinetic energy for any displacement x is proportional to:',
+            options: ['x', 'x²', 'e^x', 'ln(x)'],
+            answer: 1,
+            solution: 'Retardation a = -kx. By work-energy theorem, ΔKE = ∫(-m k x) dx = -½ m k x². Thus loss of kinetic energy is proportional to x².',
+            tip: 'Integrate retardation with respect to displacement to find work done.'
+          },
+          {
+            id: 'q2',
+            subject: 'Chemistry',
+            topic: 'Chemical Bonding',
+            type: 'MCQ',
+            text: 'Which of the following molecules has the highest dipole moment?',
+            options: ['HF', 'HCl', 'HBr', 'HI'],
+            answer: 0,
+            solution: 'HF has the highest dipole moment due to the very high electronegativity of fluorine.',
+            tip: 'Dipole moment μ = q × d. Fluorine has maximum electronegativity.'
+          },
+          {
+            id: 'q3',
+            subject: 'Mathematics',
+            topic: 'Calculus',
+            type: 'NUMERICAL',
+            text: 'Find the value of the definite integral ∫ from 0 to π/2 of cos²(x) dx (expressed in decimal up to 2 decimal places).',
+            options: [],
+            answer: '1.57',
+            solution: 'Using reduction formula or identity cos²x = (1+cos 2x)/2, the integral evaluates to π/4 ≈ 1.57.',
+            tip: 'Use standard integration formulas for trigonometric functions.'
+          }
+        ]
+      },
+      {
+        id: 'airts_1',
+        series: 'AIRTS',
+        title: 'AIRTS-01: All India Rankers Open Full Mock',
+        category: 'FULL',
+        badge: 'AIRTS • National Ranker',
+        difficulty: 'JEE Main + Advanced (Hard)',
+        durationMinutes: 60,
+        image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80',
+        description: 'Multi-concept bridge problems designed by top IIT alumni for national rankers.',
+        questions: [
+          {
+            id: 'aq1',
+            subject: 'Physics',
+            topic: 'Electrodynamics',
+            type: 'MCQ',
+            text: 'A uniform magnetic field B exists in region. A circular loop of radius r and resistance R is pulled with constant velocity v. Induced current is:',
+            options: ['Zero', 'Bvr/R', '2πBrv/R', 'Indeterminate'],
+            answer: 0,
+            solution: 'Since magnetic flux through the closed loop remains constant as it moves entirely within a uniform magnetic field, induced emf = 0.',
+            tip: 'Check whether magnetic flux Φ = B·A changes over time.'
+          },
+          {
+            id: 'aq2',
+            subject: 'Chemistry',
+            topic: 'Organic Chemistry',
+            type: 'MCQ',
+            text: 'Which intermediate is formed in the Reimer-Tiemann reaction of phenol with CHCl₃ and NaOH?',
+            options: ['Dichlorocarbene (:CCl₂)', 'Carbocation', 'Free radical', 'Carbanion'],
+            answer: 0,
+            solution: 'The electrophile in Reimer-Tiemann reaction is dichlorocarbene (:CCl₂), generated by base abstraction from chloroform.',
+            tip: 'Remember name reactions and their active electrophilic intermediates.'
+          },
+          {
+            id: 'aq3',
+            subject: 'Mathematics',
+            topic: 'Algebra',
+            type: 'NUMERICAL',
+            text: 'Find the sum of all real roots of the equation x² - 5|x| + 6 = 0.',
+            options: [],
+            answer: '0',
+            solution: 'The equation is (|x|-2)((|x|-3) = 0, giving |x|=2 or |x|=3. Roots are x = ±2, ±3. Their sum is 0.',
+            tip: 'Substitute |x| = t and solve quadratic equations.'
+          }
+        ]
+      }
+    ];
+
+    // ==================== STATE MANAGEMENT ====================
+    let ADMIN_EMAIL = localStorage.getItem('apexjee_admin_email') || 'admin@apexjee.com';
+    let candidateProfile = { name: '', year: 'Class 12th' };
+    let currentUser = null;
+    let authMode = 'login';
+    let currentFilter = 'ALL';
+    let activeTest = null;
+    let currentQIndex = 0;
+    let activeSubjectTab = 'Physics';
+    let userResponses = [];
+    let timerInterval = null;
+    let remainingSeconds = 0;
+    let activeReport = null;
+
+    function getAllTests() {
+      const customTests = JSON.parse(localStorage.getItem('apexjee_custom_tests') || '[]');
+      return [...customTests, ...BUILTIN_MOCK_TESTS];
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      restoreUserSession();
+      loadCandidateProfile();
+      renderTestCards();
+      renderAttemptHistory();
+      renderWorldwideChat();
+    });
+
+    function showToast(message, type = 'info') {
+      const existing = document.getElementById('toast-notification');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'toast-notification';
+      toast.className = `fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-bold text-white transition-all transform duration-300 translate-y-4 opacity-0 ${
+        type === 'success' ? 'bg-emerald-600' : type === 'warning' ? 'bg-amber-600' : 'bg-indigo-600'
+      }`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      }, 20);
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('apexjee_theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('apexjee_theme', 'dark');
+      }
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem('apexjee_theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function loadCandidateProfile() {
+      const saved = localStorage.getItem('apexjee_profile');
+      if (saved) {
+        try { candidateProfile = JSON.parse(saved); } catch(e) {}
+      }
+      if (currentUser) {
+        candidateProfile.name = currentUser.name;
+        candidateProfile.year = currentUser.batch || candidateProfile.year;
+      }
+      const nameEl = document.getElementById('candidate-name');
+      const yearEl = document.getElementById('candidate-year');
+      if (nameEl) nameEl.value = candidateProfile.name || '';
+      if (yearEl) yearEl.value = ['Class 11th', 'Class 12th', 'Dropper'].includes(candidateProfile.year) ? candidateProfile.year : 'Class 12th';
+    }
+
+    function saveCandidateProfile() {
+      const nameVal = document.getElementById('candidate-name').value.trim();
+      const yearVal = document.getElementById('candidate-year').value;
+      if (!nameVal) {
+        showToast('Please enter your name before saving your profile.', 'warning');
+        return;
+      }
+      candidateProfile.name = nameVal;
+      candidateProfile.year = yearVal;
+      localStorage.setItem('apexjee_profile', JSON.stringify(candidateProfile));
+      if (currentUser) {
+        currentUser.name = nameVal;
+        currentUser.batch = yearVal;
+        localStorage.setItem('apexjee_current_user', JSON.stringify(currentUser));
+        const users = JSON.parse(localStorage.getItem('apexjee_users') || '[]');
+        const idx = users.findIndex(u => u.email === currentUser.email);
+        if (idx !== -1) {
+          users[idx].name = nameVal;
+          users[idx].batch = yearVal;
+          localStorage.setItem('apexjee_users', JSON.stringify(users));
+        }
+      }
+      showToast(`Admit card profile saved for ${candidateProfile.name} (${candidateProfile.year})`, 'success');
+    }
+
+    // ==================== AUTH & ADMIN ====================
+    function openAuthModal(mode = 'login') {
+      switchAuthTab(mode);
+      document.getElementById('auth-modal').classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal').classList.add('hidden');
+    }
+
+    function switchAuthTab(mode) {
+      authMode = mode;
+      const isSignup = mode === 'signup';
+      document.getElementById('tab-login').className = !isSignup
+        ? 'px-4 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white'
+        : 'px-4 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300';
+      document.getElementById('tab-signup').className = isSignup
+        ? 'px-4 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white'
+        : 'px-4 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300';
+
+      document.getElementById('auth-name-group').classList.toggle('hidden', !isSignup);
+      document.getElementById('auth-batch-group').classList.toggle('hidden', !isSignup);
+      document.getElementById('auth-submit-btn').textContent = isSignup ? 'Create Aspirant Account' : 'Login to Account';
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email').value.trim().toLowerCase();
+      const password = document.getElementById('auth-password').value;
+      const users = JSON.parse(localStorage.getItem('apexjee_users') || '[]');
+
+      if (authMode === 'signup') {
+        const name = document.getElementById('auth-name').value.trim();
+        const batch = document.getElementById('auth-batch').value;
+        if (!name) {
+          showToast('Please enter your full name to sign up.', 'warning');
+          return;
+        }
+        if (users.some(u => u.email === email)) {
+          showToast('An account with this email already exists. Please log in.', 'warning');
+          switchAuthTab('login');
+          return;
+        }
+        const isFirstEver = users.length === 0 && !localStorage.getItem('apexjee_admin_claimed');
+        if (isFirstEver) {
+          ADMIN_EMAIL = email;
+          localStorage.setItem('apexjee_admin_email', email);
+          localStorage.setItem('apexjee_admin_claimed', 'true');
+        }
+        const newUser = {
+          name,
+          email,
+          password,
+          batch,
+          isAdmin: email === ADMIN_EMAIL,
+          joinedAt: new Date().toLocaleString('en-IN')
+        };
+        users.push(newUser);
+        localStorage.setItem('apexjee_users', JSON.stringify(users));
+        setLoggedInUser(newUser);
+        closeAuthModal();
+        showToast(newUser.isAdmin ? `Signed up as Website Administrator (${email})!` : `Welcome ${name}! Account created.`, 'success');
+      } else {
+        const found = users.find(u => u.email === email && u.password === password);
+        if (!found) {
+          showToast('Invalid email or password. Use Sign Up if you are new.', 'warning');
+          return;
+        }
+        found.isAdmin = found.email === ADMIN_EMAIL;
+        setLoggedInUser(found);
+        closeAuthModal();
+        showToast(`Welcome back, ${found.name}! Your old test records are loaded.`, 'success');
+      }
+    }
+
+    function setLoggedInUser(user) {
+      currentUser = user;
+      localStorage.setItem('apexjee_current_user', JSON.stringify(user));
+      candidateProfile.name = user.name;
+      candidateProfile.year = user.batch || 'Class 12th';
+      localStorage.setItem('apexjee_profile', JSON.stringify(candidateProfile));
+      loadCandidateProfile();
+      updateAuthUI();
+      renderAttemptHistory();
+    }
+
+    function restoreUserSession() {
+      const savedUser = localStorage.getItem('apexjee_current_user');
+      if (savedUser) {
+        try {
+          currentUser = JSON.parse(savedUser);
+          currentUser.isAdmin = currentUser.email === ADMIN_EMAIL;
+        } catch (e) {}
+      }
+      updateAuthUI();
+    }
+
+    function logoutUser() {
+      currentUser = null;
+      localStorage.removeItem('apexjee_current_user');
+      updateAuthUI();
+      closeAuthModal();
+      renderAttemptHistory();
+      showToast('Logged out successfully.', 'info');
+    }
+
+    function updateAuthUI() {
+      const authLabel = document.getElementById('auth-btn-label');
+      const adminBtn = document.getElementById('btn-admin-panel');
+      const badge = document.getElementById('profile-auth-badge');
+      const loggedBox = document.getElementById('logged-in-account-box');
+      const loggedDetails = document.getElementById('logged-in-details');
+
+      if (currentUser) {
+        authLabel.textContent = currentUser.name.split(' ')[0];
+        badge.textContent = currentUser.isAdmin ? `Admin: ${currentUser.email}` : `Verified: ${currentUser.email}`;
+        badge.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300';
+        adminBtn.classList.toggle('hidden', !currentUser.isAdmin);
+        loggedBox.classList.remove('hidden');
+        loggedDetails.textContent = `${currentUser.name} (${currentUser.email}) • ${currentUser.batch}${currentUser.isAdmin ? ' • ADMINISTRATOR' : ''}`;
+      } else {
+        authLabel.textContent = 'Login / Sign Up';
+        badge.textContent = 'Guest Session (Log in to sync records)';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
+        adminBtn.classList.add('hidden');
+        loggedBox.classList.add('hidden');
+      }
+    }
+
+    // ==================== WORLDWIDE CHATBOX ====================
+    const BANNED_WORDS = ['abuse', 'idiot', 'stupid', 'spam', 'scam', 'xxx', 'hate'];
+
+    function renderWorldwideChat() {
+      const box = document.getElementById('chat-messages-box');
+      if (!box) return;
+      const filterSub = document.getElementById('chat-subject-filter').value;
+      const messages = JSON.parse(localStorage.getItem('apexjee_global_chat') || '[]');
+      const visible = messages.filter(m => !m.blocked && (filterSub === 'ALL' || m.subject === filterSub));
+
+      if (visible.length === 0) {
+        box.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center p-6">
+            <div class="text-sm font-bold text-slate-700 dark:text-slate-300">No doubts posted in this channel yet</div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Be the first aspirant to post a Physics, Chemistry, or Maths doubt below!</p>
+          </div>
+        `;
+        return;
+      }
+
+      const isAdmin = currentUser && currentUser.isAdmin;
+      box.innerHTML = visible.map(m => `
+        <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-xs text-slate-900 dark:text-white">${escapeHtml(m.senderName)}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${escapeHtml(m.senderBatch || 'Aspirant')}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300">${escapeHtml(m.subject)}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] text-slate-400">${m.timeStr}</span>
+              ${isAdmin ? `<button onclick="adminToggleBlockChat('${m.id}')" class="px-2 py-0.5 rounded bg-rose-100 text-rose-700 text-[10px] font-bold hover:bg-rose-200">Block</button>` : ''}
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">${escapeHtml(m.text)}</p>
+        </div>
+      `).join('');
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const subject = document.getElementById('chat-subject-select').value;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const senderName = (currentUser && currentUser.name) || document.getElementById('candidate-name').value.trim();
+      if (!senderName) {
+        showToast('Please enter your name in Candidate Profile or Log In before posting in chat.', 'warning');
+        return;
+      }
+
+      const bannedEmails = JSON.parse(localStorage.getItem('apexjee_banned_users') || '[]');
+      if (currentUser && bannedEmails.includes(currentUser.email)) {
+        showToast('Your account has been restricted from posting in the chat by the Administrator.', 'warning');
+        return;
+      }
+
+      const lower = text.toLowerCase();
+      if (BANNED_WORDS.some(w => lower.includes(w))) {
+        showToast('Message blocked by automatic inappropriate-language filter.', 'warning');
+        return;
+      }
+
+      const messages = JSON.parse(localStorage.getItem('apexjee_global_chat') || '[]');
+      messages.push({
+        id: 'msg_' + Date.now(),
+        senderName,
+        senderEmail: currentUser ? currentUser.email : 'guest',
+        senderBatch: (currentUser && currentUser.batch) || document.getElementById('candidate-year').value,
+        subject,
+        text,
+        timeStr: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        blocked: false
+      });
+      localStorage.setItem('apexjee_global_chat', JSON.stringify(messages.slice(-100)));
+      input.value = '';
+      renderWorldwideChat();
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+
+    // ==================== ADMIN CONSOLE ====================
+    function openAdminModal() {
+      if (!currentUser || !currentUser.isAdmin) {
+        showToast('Access restricted to Website Administrator email.', 'warning');
+        return;
+      }
+      document.getElementById('admin-modal').classList.remove('hidden');
+      switchAdminTab('users');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('admin-modal').classList.add('hidden');
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.className = 'admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+      });
+      const active = document.getElementById(`admin-tab-${tab}`);
+      if (active) active.className = 'admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-600 text-white';
+
+      const area = document.getElementById('admin-content-area');
+      if (tab === 'users') {
+        const users = JSON.parse(localStorage.getItem('apexjee_users') || '[]');
+        const history = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+        area.innerHTML = `
+          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <div class="text-xs font-bold text-slate-500 mb-1">Administrator Email Configuration</div>
+            <div class="flex flex-wrap gap-2 items-center">
+              <input id="admin-email-update" type="email" value="${ADMIN_EMAIL}" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono" />
+              <button onclick="updateAdminEmail()" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-bold">Update Admin Email</button>
+            </div>
+          </div>
+          <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">All Registered Students (${users.length}) & Hidden Credentials</h4>
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 dark:bg-slate-800">
+                <tr>
+                  <th class="p-2.5">Name</th>
+                  <th class="p-2.5">Email</th>
+                  <th class="p-2.5">Batch</th>
+                  <th class="p-2.5">Joined</th>
+                  <th class="p-2.5">Tests Taken</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                ${users.length === 0 ? '<tr><td colspan="5" class="p-4 text-center text-slate-500">No registered users yet.</td></tr>' : users.map(u => {
+                  const count = history.filter(h => h.userEmail === u.email || h.candidateName === u.name).length;
+                  return `<tr>
+                    <td class="p-2.5 font-bold">${escapeHtml(u.name)}</td>
+                    <td class="p-2.5 font-mono">${escapeHtml(u.email)}</td>
+                    <td class="p-2.5">${escapeHtml(u.batch)}</td>
+                    <td class="p-2.5 text-slate-500">${u.joinedAt || '-'}</td>
+                    <td class="p-2.5 font-bold text-indigo-600">${count}</td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+          <h4 class="font-extrabold text-sm text-slate-900 dark:text-white pt-2">All Test Submissions Log (${history.length})</h4>
+          <div class="space-y-2">
+            ${history.length === 0 ? '<p class="text-xs text-slate-500">No submissions recorded yet.</p>' : history.map(h => `
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex justify-between text-xs">
+                <div><strong>${escapeHtml(h.candidateName)}</strong> (${escapeHtml(h.userEmail || 'Guest')}) • ${escapeHtml(h.testTitle)}</div>
+                <div class="font-bold text-indigo-600">Score: ${h.score}/${h.maxScore} • Rank #${h.air}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (tab === 'chat') {
+        const messages = JSON.parse(localStorage.getItem('apexjee_global_chat') || '[]');
+        const banned = JSON.parse(localStorage.getItem('apexjee_banned_users') || '[]');
+        area.innerHTML = `
+          <div class="text-xs text-slate-500">Block inappropriate chat messages or ban abusive user emails from posting.</div>
+          <div class="space-y-2.5">
+            ${messages.length === 0 ? '<p class="text-xs text-slate-500">No chat messages yet.</p>' : messages.slice().reverse().map(m => `
+              <div class="p-3 rounded-xl border ${m.blocked ? 'bg-rose-50/70 dark:bg-rose-950/30 border-rose-300' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700'} flex items-center justify-between gap-3 text-xs">
+                <div>
+                  <div class="font-bold">${escapeHtml(m.senderName)} <span class="font-mono text-slate-400">(${escapeHtml(m.senderEmail)})</span> • ${m.timeStr}</div>
+                  <div class="mt-1 ${m.blocked ? 'line-through text-rose-600' : ''}">${escapeHtml(m.text)}</div>
+                </div>
+                <div class="flex gap-1.5 shrink-0">
+                  <button onclick="adminToggleBlockChat('${m.id}', true)" class="px-2.5 py-1 rounded-lg ${m.blocked ? 'bg-emerald-600' : 'bg-rose-600'} text-white font-bold">
+                    ${m.blocked ? 'Unblock Msg' : 'Block Msg'}
+                  </button>
+                  ${m.senderEmail !== 'guest' ? `
+                    <button onclick="adminToggleBanUser('${escapeHtml(m.senderEmail)}')" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white font-bold">
+                      ${banned.includes(m.senderEmail) ? 'Unban Email' : 'Ban Email'}
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (tab === 'addtest') {
+        area.innerHTML = `
+          <form onsubmit="handleAdminAddTest(event)" class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block font-bold mb-1">Test Title</label>
+                <input id="new-test-title" required placeholder="e.g., AIRTS-04 Full Mock" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+              </div>
+              <div>
+                <label class="block font-bold mb-1">Series</label>
+                <select id="new-test-series" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
+                  <option value="AIRTS">AIRTS (All India Rankers)</option>
+                  <option value="REGULAR">Regular Mock</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold mb-1">Duration (Minutes)</label>
+                <input id="new-test-duration" type="number" value="60" min="5" max="180" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-bold mb-1">Paste Questions JSON Array</label>
+              <textarea id="new-test-json" rows="7" required placeholder='[{"subject":"Physics","topic":"Kinematics","type":"MCQ","text":"A ball is thrown...","options":["10 m","20 m","30 m","40 m"],"answer":1,"solution":"h = u²/2g","tip":"Use v²=u²+2as"}]' class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-xs"></textarea>
+            </div>
+            <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold">Publish Mock Test Live</button>
+          </form>
+        `;
+      }
+    }
+
+    function updateAdminEmail() {
+      const val = document.getElementById('admin-email-update').value.trim().toLowerCase();
+      if (!val) return;
+      ADMIN_EMAIL = val;
+      localStorage.setItem('apexjee_admin_email', val);
+      showToast(`Administrator email updated to ${val}`, 'success');
+    }
+
+    function adminToggleBlockChat(msgId, refreshAdmin = false) {
+      const messages = JSON.parse(localStorage.getItem('apexjee_global_chat') || '[]');
+      const target = messages.find(m => m.id === msgId);
+      if (target) {
+        target.blocked = !target.blocked;
+        localStorage.setItem('apexjee_global_chat', JSON.stringify(messages));
+        renderWorldwideChat();
+        if (refreshAdmin) switchAdminTab('chat');
+        showToast(target.blocked ? 'Inappropriate message blocked.' : 'Message restored.', 'info');
+      }
+    }
+
+    function adminToggleBanUser(email) {
+      let banned = JSON.parse(localStorage.getItem('apexjee_banned_users') || '[]');
+      if (banned.includes(email)) {
+        banned = banned.filter(e => e !== email);
+        showToast(`Unbanned ${email}`, 'info');
+      } else {
+        banned.push(email);
+        showToast(`Banned ${email} from chat`, 'warning');
+      }
+      localStorage.setItem('apexjee_banned_users', JSON.stringify(banned));
+      switchAdminTab('chat');
+    }
+
+    function handleAdminAddTest(e) {
+      e.preventDefault();
+      try {
+        const title = document.getElementById('new-test-title').value.trim();
+        const series = document.getElementById('new-test-series').value;
+        const duration = Number(document.getElementById('new-test-duration').value);
+        const questions = JSON.parse(document.getElementById('new-test-json').value);
+        if (!Array.isArray(questions) || questions.length === 0) throw new Error('Invalid questions array');
+
+        const customTests = JSON.parse(localStorage.getItem('apexjee_custom_tests') || '[]');
+        customTests.unshift({
+          id: 'custom_' + Date.now(),
+          series,
+          title,
+          category: 'FULL',
+          badge: `${series} • Custom Admin Paper`,
+          difficulty: 'JEE Main + Advanced',
+          durationMinutes: duration,
+          image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80',
+          description: `Custom mock paper published by Website Administrator (${questions.length} Questions).`,
+          questions: questions.map((q, i) => ({ id: `cq_${Date.now()}_${i}`, ...q }))
+        });
+        localStorage.setItem('apexjee_custom_tests', JSON.stringify(customTests));
+        renderTestCards();
+        closeAdminModal();
+        showToast(`Published "${title}" with ${questions.length} questions!`, 'success');
+      } catch (err) {
+        showToast('Invalid JSON format. Check syntax and try again.', 'warning');
+      }
+    }
+
+    function filterTests(series) {
+      currentFilter = series;
+      document.querySelectorAll('.test-filter-btn').forEach(btn => {
+        btn.className = 'test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+      });
+      const activeBtn = document.getElementById(`filter-${series}`);
+      if (activeBtn) {
+        activeBtn.className = series === 'AIRTS'
+          ? 'test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-slate-950 font-extrabold shadow'
+          : 'test-filter-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow';
+      }
+      renderTestCards();
+    }
+
+    function renderTestCards() {
+      const grid = document.getElementById('test-cards-grid');
+      const allTests = getAllTests();
+      const filtered = allTests.filter(t => currentFilter === 'ALL' || t.series === currentFilter);
+      const history = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+
+      grid.innerHTML = filtered.map(test => {
+        const totalMarks = test.questions.length * 4;
+        const isAirts = test.series === 'AIRTS';
+        const realAttempts = history.filter(h => h.testId === test.id);
+        const realTopper = realAttempts.length > 0
+          ? `${Math.max(...realAttempts.map(a => a.score))}/${totalMarks}`
+          : 'No attempts yet';
+        return `
+          <article class="group bg-white dark:bg-slate-900 rounded-2xl border ${
+            isAirts
+              ? 'border-amber-300/80 dark:border-amber-700/70 hover:border-amber-500'
+              : 'border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700'
+          } overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
+            <div class="relative h-40 bg-gradient-to-r from-indigo-900 to-slate-900 overflow-hidden">
+              <img src="${test.image}" alt="${test.title}" onerror="this.style.display='none'" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg ${
+                isAirts ? 'bg-amber-500 text-slate-950' : 'bg-indigo-600/95 text-white'
+              } text-[11px] font-extrabold shadow">${test.badge}</span>
+              <span class="absolute bottom-3 left-3 text-xs font-semibold text-slate-200">${test.difficulty}</span>
+              <span class="absolute bottom-3 right-3 text-[11px] font-bold px-2 py-0.5 rounded bg-black/60 text-amber-300">${realAttempts.length} Real Attempts</span>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col">
+              <h3 class="font-extrabold text-lg text-slate-900 dark:text-white leading-snug mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">${test.title}</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4 flex-1">${test.description}</p>
+
+              <div class="grid grid-cols-3 gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700/70 text-center mb-4">
+                <div>
+                  <div class="text-xs font-extrabold text-slate-900 dark:text-white">${test.questions.length} Qs</div>
+                  <div class="text-[10px] text-slate-500">PCM Mix</div>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-slate-900 dark:text-white">${totalMarks} Marks</div>
+                  <div class="text-[10px] text-slate-500">Top: ${realTopper}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-slate-900 dark:text-white">${test.durationMinutes} Min</div>
+                  <div class="text-[10px] text-slate-500">Timed CBT</div>
+                </div>
+              </div>
+
+              <button onclick="startMockTest('${test.id}')" class="w-full py-3 px-4 rounded-xl ${
+                isAirts
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold shadow-amber-500/20'
+                  : 'bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-indigo-500/20'
+              } text-sm shadow-md transition flex items-center justify-center gap-2">
+                <span>${isAirts ? 'Attempt AIRTS Ranked Test' : 'Start Free Mock Test'}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderAttemptHistory() {
+      const container = document.getElementById('history-container');
+      const allHistory = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+      const history = currentUser
+        ? allHistory.filter(h => h.userEmail === currentUser.email || h.candidateName === currentUser.name)
+        : allHistory;
+
+      if (history.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center">
+            <div class="text-sm font-semibold text-slate-700 dark:text-slate-300">No mock tests attempted yet</div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Launch any test above to generate your real All India Rank and Topic Diagnostic report.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
+                <th class="py-3.5 px-4 font-bold">Mock Test Name</th>
+                <th class="py-3.5 px-4 font-bold">Date</th>
+                <th class="py-3.5 px-4 font-bold text-center">Score</th>
+                <th class="py-3.5 px-4 font-bold text-center">Real Rank</th>
+                <th class="py-3.5 px-4 font-bold text-center">Accuracy</th>
+                <th class="py-3.5 px-4 font-bold text-right">Analytics</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+              ${history.map((item) => {
+                const realIdx = allHistory.indexOf(item);
+                return `
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition">
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white">${escapeHtml(item.testTitle)}</td>
+                  <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400">${item.dateStr}</td>
+                  <td class="py-3.5 px-4 text-center font-extrabold text-indigo-600 dark:text-indigo-400">${item.score} / ${item.maxScore}</td>
+                  <td class="py-3.5 px-4 text-center font-bold text-slate-800 dark:text-slate-200">#${item.air.toLocaleString()} (${item.percentile}%ile)</td>
+                  <td class="py-3.5 px-4 text-center font-semibold text-emerald-600 dark:text-emerald-400">${item.accuracy}%</td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button onclick="openSavedReport(${realIdx})" class="px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 font-semibold text-xs hover:bg-indigo-100 transition">
+                      View Report &rarr;
+                    </button>
+                  </td>
+                </tr>
+              `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // ==================== CBT TEST EXECUTION ====================
+    function startMockTest(testId) {
+      const nameInput = document.getElementById('candidate-name').value.trim();
+      if (!nameInput && !(currentUser && currentUser.name)) {
+        showToast('Please enter your Candidate Name first so your real rank appears on the leaderboard.', 'warning');
+        document.getElementById('candidate-name').focus();
+        return;
+      }
+      candidateProfile.name = nameInput || currentUser.name;
+      candidateProfile.year = document.getElementById('candidate-year').value;
+      localStorage.setItem('apexjee_profile', JSON.stringify(candidateProfile));
+
+      activeTest = getAllTests().find(t => t.id === testId);
+      if (!activeTest) return;
+
+      userResponses = activeTest.questions.map(q => ({
+        questionId: q.id,
+        selectedOption: null,
+        numericalAnswer: '',
+        status: 'unattempted',
+        timeSpent: 0
+      }));
+
+      currentQIndex = 0;
+      activeSubjectTab = activeTest.questions[0].subject;
+      remainingSeconds = activeTest.durationMinutes * 60;
+
+      document.getElementById('landing-view').classList.add('hidden');
+      document.getElementById('results-view').classList.add('hidden');
+      document.getElementById('cbt-view').classList.remove('hidden');
+
+      document.getElementById('cbt-test-title').textContent = activeTest.title;
+      document.getElementById('cbt-candidate-info').textContent = `${candidateProfile.name} (${candidateProfile.year})`;
+
+      renderSubjectTabs();
+      loadCbtQuestion(0);
+      startCbtTimer();
+    }
+
+    function renderSubjectTabs() {
+      const subjects = [...new Set(activeTest.questions.map(q => q.subject))];
+      const container = document.getElementById('cbt-subject-tabs');
+      container.innerHTML = subjects.map(sub => `
+        <button onclick="switchSubjectTab('${sub}')" id="subject-tab-${sub}" class="px-4 py-2 rounded-xl text-xs font-bold transition ${
+          activeSubjectTab === sub ? 'bg-indigo-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+        }">${sub}</button>
+      `).join('');
+    }
+
+    function switchSubjectTab(sub) {
+      activeSubjectTab = sub;
+      renderSubjectTabs();
+      const firstIdx = activeTest.questions.findIndex(q => q.subject === sub);
+      if (firstIdx !== -1) loadCbtQuestion(firstIdx);
+    }
+
+    function loadCbtQuestion(index) {
+      currentQIndex = index;
+      const q = activeTest.questions[index];
+      activeSubjectTab = q.subject;
+      renderSubjectTabs();
+
+      document.getElementById('q-number-badge').textContent = `Question ${index + 1} of ${activeTest.questions.length}`;
+      document.getElementById('q-topic-badge').textContent = `${q.subject} • ${q.topic}`;
+      document.getElementById('q-text-content').textContent = q.text;
+
+      const optContainer = document.getElementById('q-options-container');
+      const resp = userResponses[index];
+
+      if (q.type === 'MCQ') {
+        optContainer.innerHTML = q.options.map((opt, i) => `
+          <label class="flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition ${
+            resp.selectedOption === i
+              ? 'bg-indigo-50 dark:bg-indigo-950/50 border-indigo-500 text-indigo-900 dark:text-indigo-200'
+              : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 hover:border-slate-400'
+          }">
+            <input type="radio" name="cbt_option" ${resp.selectedOption === i ? 'checked' : ''} onclick="selectOption(${i})" class="w-4 h-4 text-indigo-600" />
+            <span class="text-sm font-medium">${String.fromCharCode(65 + i)}. ${opt}</span>
+          </label>
+        `).join('');
+      } else {
+        optContainer.innerHTML = `
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-500">Numerical Value Answer:</label>
+            <input type="number" step="any" id="numerical-input" value="${resp.numericalAnswer}" oninput="recordNumericalInput(this.value)" placeholder="Enter numerical value..." class="w-full sm:w-1/2 px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-sm" />
+          </div>
+        `;
+      }
+
+      if (resp.status === 'unattempted') {
+        resp.status = 'not_answered';
+      }
+      renderQuestionPalette();
+    }
+
+    function selectOption(optIdx) {
+      userResponses[currentQIndex].selectedOption = optIdx;
+      userResponses[currentQIndex].status = 'saved';
+      renderQuestionPalette();
+    }
+
+    function recordNumericalInput(val) {
+      userResponses[currentQIndex].numericalAnswer = val;
+      userResponses[currentQIndex].status = val.trim() !== '' ? 'saved' : 'not_answered';
+      renderQuestionPalette();
+    }
+
+    function markForReview() {
+      userResponses[currentQIndex].status = 'marked';
+      renderQuestionPalette();
+      nextCbtQuestion();
+    }
+
+    function clearResponse() {
+      userResponses[currentQIndex].selectedOption = null;
+      userResponses[currentQIndex].numericalAnswer = '';
+      userResponses[currentQIndex].status = 'not_answered';
+      loadCbtQuestion(currentQIndex);
+    }
+
+    function nextCbtQuestion() {
+      if (currentQIndex < activeTest.questions.length - 1) {
+        loadCbtQuestion(currentQIndex + 1);
+      }
+    }
+
+    function renderQuestionPalette() {
+      const grid = document.getElementById('palette-grid');
+      grid.innerHTML = activeTest.questions.map((q, i) => {
+        const st = userResponses[i].status;
+        let bgClass = 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        if (st === 'saved') bgClass = 'bg-emerald-500 text-white font-bold';
+        else if (st === 'marked') bgClass = 'bg-amber-500 text-white font-bold';
+        else if (st === 'not_answered') bgClass = 'bg-rose-500 text-white font-bold';
+
+        const isCurrent = currentQIndex === i ? 'ring-2 ring-indigo-600 ring-offset-2 dark:ring-offset-slate-900' : '';
+        return `
+          <button onclick="loadCbtQuestion(${i})" class="h-10 rounded-xl text-xs font-bold transition flex items-center justify-center ${bgClass} ${isCurrent}">
+            ${i + 1}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function startCbtTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        remainingSeconds--;
+        const hrs = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
+        const secs = String(remainingSeconds % 60).padStart(2, '0');
+        document.getElementById('cbt-timer').textContent = `${hrs}:${mins}:${secs}`;
+
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          submitTest();
+        }
+      }, 1000);
+    }
+
+    function confirmSubmitTest() {
+      if (confirm('Are you sure you want to submit this mock test and view your rank & weak topic report?')) {
+        submitTest();
+      }
+    }
+
+    function submitTest() {
+      if (timerInterval) clearInterval(timerInterval);
+      const totalTimeUsed = (activeTest.durationMinutes * 60) - remainingSeconds;
+      const report = computeDetailedReport(activeTest, userResponses, totalTimeUsed);
+
+      const allHistory = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+      allHistory.unshift(report);
+      recalculateRealRanks(allHistory);
+      localStorage.setItem('apexjee_history', JSON.stringify(allHistory));
+
+      activeReport = report;
+      document.getElementById('cbt-view').classList.add('hidden');
+      renderResults(report);
+      document.getElementById('results-view').classList.remove('hidden');
+      renderAttemptHistory();
+      showToast('Test submitted successfully! View your AIR and analytics below.', 'success');
+    }
+
+    function recalculateRealRanks(history) {
+      const byTest = {};
+      history.forEach(item => {
+        if (!byTest[item.testId]) byTest[item.testId] = [];
+        byTest[item.testId].push(item);
+      });
+      Object.values(byTest).forEach(list => {
+        list.sort((a, b) => b.score - a.score || a.totalTimeUsed - b.totalTimeUsed);
+        const total = list.length;
+        list.forEach((item, idx) => {
+          item.air = idx + 1;
+          item.totalPool = total;
+          item.percentile = total === 1 ? 100 : Number((((total - idx) / total) * 100).toFixed(2));
+        });
+      });
+    }
+
+    function computeDetailedReport(test, responses, totalTimeUsed) {
+      let score = 0;
+      let correct = 0;
+      let incorrect = 0;
+      let skipped = 0;
+
+      const questionResults = test.questions.map((q, idx) => {
+        const resp = responses[idx];
+        let status = 'skipped';
+        let awarded = 0;
+
+        if (resp.status === 'saved' || resp.status === 'marked') {
+          if (q.type === 'MCQ') {
+            if (resp.selectedOption !== null) {
+              if (resp.selectedOption === q.answer) {
+                status = 'correct';
+                awarded = 4;
+                correct++;
+                score += 4;
+              } else {
+                status = 'incorrect';
+                awarded = -1;
+                incorrect++;
+                score -= 1;
+              }
+            } else {
+              skipped++;
+            }
+          } else if (q.type === 'NUMERICAL') {
+            if (resp.numericalAnswer.trim() !== '') {
+              const userVal = parseFloat(resp.numericalAnswer.trim());
+              const correctVal = parseFloat(q.answer);
+              if (!isNaN(userVal) && Math.abs(userVal - correctVal) <= 0.05) {
+                status = 'correct';
+                awarded = 4;
+                correct++;
+                score += 4;
+              } else {
+                status = 'incorrect';
+                awarded = -1;
+                incorrect++;
+                score -= 1;
+              }
+            } else {
+              skipped++;
+            }
+          }
+        } else {
+          skipped++;
+        }
+
+        return {
+          questionId: q.id,
+          subject: q.subject,
+          topic: q.topic,
+          type: q.type,
+          text: q.text,
+          options: q.options,
+          correctAnswer: q.answer,
+          userSelection: q.type === 'MCQ' ? resp.selectedOption : resp.numericalAnswer,
+          status,
+          awarded,
+          solution: q.solution,
+          tip: q.tip
+        };
+      });
+
+      const maxScore = test.questions.length * 4;
+      const attempted = correct + incorrect;
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
+      const topicMap = {};
+      questionResults.forEach(qr => {
+        if (!topicMap[qr.topic]) {
+          topicMap[qr.topic] = { subject: qr.subject, correct: 0, total: 0 };
+        }
+        topicMap[qr.topic].total++;
+        if (qr.status === 'correct') topicMap[qr.topic].correct++;
+      });
+
+      const topicDiagnostics = Object.keys(topicMap).map(topic => {
+        const data = topicMap[topic];
+        const pct = Math.round((data.correct / data.total) * 100);
+        let classification = 'Weak';
+        if (pct >= 75) classification = 'Strong';
+        else if (pct >= 40) classification = 'Moderate';
+
+        return { topic, subject: data.subject, correct: data.correct, total: data.total, accuracyPct: pct, classification };
+      });
+
+      return {
+        testId: test.id,
+        testTitle: test.title,
+        candidateName: candidateProfile.name,
+        candidateYear: candidateProfile.year,
+        userEmail: currentUser ? currentUser.email : '',
+        dateStr: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
+        score,
+        maxScore,
+        correct,
+        incorrect,
+        skipped,
+        attempted,
+        accuracy,
+        air: 1,
+        percentile: 100,
+        totalPool: 1,
+        totalTimeUsed,
+        topicDiagnostics,
+        questionResults
+      };
+    }
+
+    function renderResults(report) {
+      document.getElementById('res-test-title').textContent = report.testTitle;
+      document.getElementById('res-candidate-subtitle').textContent = `Performance Report for ${report.candidateName} (${report.candidateYear})`;
+      document.getElementById('res-score').textContent = `${report.score} / ${report.maxScore}`;
+      document.getElementById('res-score-sub').textContent = `Correct: ${report.correct} | Incorrect: ${report.incorrect} | Skipped: ${report.skipped}`;
+      document.getElementById('res-air').textContent = `#${report.air.toLocaleString()}`;
+      document.getElementById('res-percentile').textContent = `${report.percentile}%ile against cohort`;
+      document.getElementById('res-pool-badge').textContent = `Cohort Pool: ${report.totalPool || 1} aspirants`;
+      document.getElementById('res-accuracy').textContent = `${report.accuracy}%`;
+
+      const mins = Math.floor(report.totalTimeUsed / 60);
+      const secs = report.totalTimeUsed % 60;
+      document.getElementById('res-time').textContent = `${mins}m ${secs}s`;
+
+      // Cohort Comparison
+      const cohortBox = document.getElementById('res-cohort-comparison');
+      cohortBox.innerHTML = `
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+          <div class="text-xs text-slate-500 font-bold uppercase">AIR-1 Topper Benchmark</div>
+          <div class="text-xl font-extrabold text-slate-900 dark:text-white mt-1">${report.maxScore} Marks</div>
+          <div class="text-xs text-emerald-600 font-semibold mt-1">100% Accuracy Target</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+          <div class="text-xs text-slate-500 font-bold uppercase">Your Score & Standing</div>
+          <div class="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-1">${report.score} Marks</div>
+          <div class="text-xs text-indigo-600 font-semibold mt-1">Rank #${report.air} in Cohort</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+          <div class="text-xs text-slate-500 font-bold uppercase">Top 1% Cutoff Benchmark</div>
+          <div class="text-xl font-extrabold text-slate-900 dark:text-white mt-1">${Math.round(report.maxScore * 0.85)} Marks</div>
+          <div class="text-xs text-amber-600 font-semibold mt-1">Target for Top NITs/IITs</div>
+        </div>
+      `;
+
+      // Topic Diagnostics
+      const diagBox = document.getElementById('res-topic-diagnostics');
+      diagBox.innerHTML = report.topicDiagnostics.map(td => {
+        const badgeColor = td.classification === 'Strong'
+          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300'
+          : td.classification === 'Moderate'
+          ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-300'
+          : 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 border-rose-300';
+        return `
+          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sm text-slate-900 dark:text-white">${escapeHtml(td.topic)}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300">${escapeHtml(td.subject)}</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Accuracy: ${td.accuracyPct}% (${td.correct}/${td.total} correct)</p>
+            </div>
+            <span class="px-3 py-1 rounded-xl text-xs font-extrabold border ${badgeColor}">${td.classification} Topic</span>
+          </div>
+        `;
+      }).join('');
+
+      // Question Solutions
+      const solBox = document.getElementById('res-question-solutions');
+      solBox.innerHTML = report.questionResults.map((qr, idx) => `
+        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span class="text-indigo-600 dark:text-indigo-400">Q${idx + 1} • ${escapeHtml(qr.subject)} (${escapeHtml(qr.topic)})</span>
+            <span class="px-2 py-0.5 rounded ${
+              qr.status === 'correct' ? 'bg-emerald-100 text-emerald-700' : qr.status === 'incorrect' ? 'bg-rose-100 text-rose-700' : 'bg-slate-200 text-slate-700'
+            }">${qr.status.toUpperCase()} (${qr.awarded} Marks)</span>
+          </div>
+          <p class="text-xs sm:text-sm font-medium text-slate-900 dark:text-white">${escapeHtml(qr.text)}</p>
+          <div class="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-xs text-indigo-950 dark:text-indigo-200 space-y-1">
+            <div><strong>Solution:</strong> ${escapeHtml(qr.solution)}</div>
+            <div><strong>Expert Tip:</strong> ${escapeHtml(qr.tip)}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // Leaderboard
+      const allHistory = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+      const testAttempts = allHistory.filter(h => h.testId === report.testId);
+      testAttempts.sort((a, b) => b.score - a.score || a.totalTimeUsed - b.totalTimeUsed);
+
+      const lbBox = document.getElementById('res-leaderboard');
+      lbBox.innerHTML = testAttempts.map((item, i) => `
+        <div class="p-3 rounded-xl ${item.candidateName === report.candidateName ? 'bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-300' : 'bg-slate-50 dark:bg-slate-800/50'} flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2.5">
+            <span class="font-black text-slate-700 dark:text-slate-300">#${i + 1}</span>
+            <div>
+              <div class="font-bold text-slate-900 dark:text-white">${escapeHtml(item.candidateName)} <span class="text-[10px] text-slate-400 font-normal">(${escapeHtml(item.candidateYear)})</span></div>
+              <div class="text-[10px] text-slate-400">${item.dateStr}</div>
+            </div>
+          </div>
+          <div class="text-right font-extrabold text-indigo-600 dark:text-indigo-400">
+            ${item.score}/${item.maxScore} <span class="text-[10px] text-slate-400 font-normal">(${item.accuracy}%)</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openSavedReport(historyIndex) {
+      const allHistory = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+      const report = allHistory[historyIndex];
+      if (!report) return;
+      document.getElementById('landing-view').classList.add('hidden');
+      renderResults(report);
+      document.getElementById('results-view').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function returnToDashboard() {
+      document.getElementById('results-view').classList.add('hidden');
+      document.getElementById('landing-view').classList.remove('hidden');
+      renderTestCards();
+      renderAttemptHistory();
+    }
+
+    function openGlobalLeaderboard() {
+      const modal = document.getElementById('global-leaderboard-modal');
+      const body = document.getElementById('global-leaderboard-body');
+      const allHistory = JSON.parse(localStorage.getItem('apexjee_history') || '[]');
+      allHistory.sort((a, b) => b.score - a.score || a.totalTimeUsed - b.totalTimeUsed);
+
+      if (allHistory.length === 0) {
+        body.innerHTML = '<div class="p-6 text-center text-xs text-slate-500">No mock tests completed by any aspirants yet. Be the first to appear on the leaderboard!</div>';
+      } else {
+        body.innerHTML = allHistory.map((item, i) => `
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xs">${i + 1}</span>
+              <div>
+                <div class="font-extrabold text-slate-900 dark:text-white">${escapeHtml(item.candidateName)} <span class="font-normal text-slate-400 text-[11px]">(${escapeHtml(item.candidateYear)})</span></div>
+                <div class="text-slate-500 text-[10px]">${escapeHtml(item.testTitle)} • ${item.dateStr}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-black text-indigo-600 dark:text-indigo-400 text-sm">${item.score} / ${item.maxScore}</div>
+              <div class="text-[10px] text-emerald-600 font-bold">Accuracy: ${item.accuracy}%</div>
+            </div>
+          </div>
+        `).join('');
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeGlobalLeaderboard() {
+      document.getElementById('global-leaderboard-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
